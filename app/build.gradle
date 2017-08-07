@@ -14,6 +14,11 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "int", "LIMIT", "100"
+        buildConfigField "String", "BASEURL", "\"https://gateway.marvel.com/v1/public/\""
+        buildConfigField "int", "CACHETIME", "432000" // 5days
+        buildConfigField "String", "PUBLIC_KEY", "\"fb9cf622de091ac20051e62a51c81149\""
     }
     buildTypes {
         release {
@@ -33,6 +38,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
+//  Android Support
     implementation 'com.android.support:recyclerview-v7:25.4.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+
+//  Retrofit
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+
+//  Gson
+    implementation 'com.google.code.gson:gson:2.8.0'
 }
