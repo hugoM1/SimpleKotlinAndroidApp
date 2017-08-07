@@ -15,7 +15,7 @@ interface MarvelApi {
     @GET("characters?orderBy=-modified&ts=1&hash=b68e7aeef8e1843eb3b2958aa737c743")
     fun getCharactersList(
             @Query("apikey") apiKey: String,
-            @Query("limit") limit: Int): Call<List<Characters>>
+            @Query("limit") limit: Int): Call<Characters>
 
     //https://gateway.marvel.com/v1/public/characters/1009148?ts=1&apikey=fb9cf622de091ac20051e62a51c81149&hash=b68e7aeef8e1843eb3b2958aa737c743
     @GET("characters/{characterId}?ts=1&hash=b68e7aeef8e1843eb3b2958aa737c743")
