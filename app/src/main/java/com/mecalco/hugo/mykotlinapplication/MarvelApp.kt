@@ -11,18 +11,19 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MarvelApp : Application() {
 
     companion object {
-        lateinit var retrofit: Retrofit
-        lateinit var api: MarvelApi
+        lateinit var mRetrofit: Retrofit
+        lateinit var mAPI: MarvelApi
     }
 
     override fun onCreate() {
         super.onCreate()
 
-        retrofit = Retrofit.Builder()
+        mRetrofit = Retrofit.Builder()
                 .baseUrl(BuildConfig.BASEURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
-        api = retrofit.create(MarvelApi::class.java)
+        mAPI = mRetrofit.create(MarvelApi::class.java)
     }
+
 }
