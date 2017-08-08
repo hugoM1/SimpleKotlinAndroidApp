@@ -2,7 +2,7 @@ package com.mecalco.hugo.mykotlinapplication
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.mecalco.hugo.mykotlinapplication.home.FragmentHome
+import com.mecalco.hugo.mykotlinapplication.home.HomeFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     fun initViews(){
         supportFragmentManager.beginTransaction()
-                .add(R.id.main_container, FragmentHome.fragmentHome, " FragmentHome")
+                .add(R.id.main_container, HomeFragment.fragmentHome, " HomeFragment")
                 .commit()
     }
 

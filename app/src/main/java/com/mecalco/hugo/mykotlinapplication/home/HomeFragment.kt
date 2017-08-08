@@ -19,14 +19,14 @@ import retrofit2.Response
 /**
  * @author by hugo on 8/7/17.
  */
-class FragmentHome: Fragment() {
+class HomeFragment : Fragment() {
 
     companion object{
-        val TAG = "FragmentHome"
-        val fragmentHome = FragmentHome()
+        val TAG = "HomeFragment"
+        val fragmentHome = HomeFragment()
         lateinit var mApiService: MarvelApiService
         lateinit var mAdapter: HomeFragmentAdapter
-        lateinit var mLoadingProgress : ProgressBar
+        lateinit var mLoadingProgress: ProgressBar
     }
 
     lateinit var mRecyclerView: RecyclerView
@@ -68,14 +68,19 @@ class FragmentHome: Fragment() {
     }
 
     class RetrieveCharactersTask : AsyncTask<String, Void, Response<Characters>?>() {
+
         override fun doInBackground(vararg p0: String?): Response<Characters>? {
             return mApiService.getCharacters()
         }
 
         override fun onPostExecute(result: Response<Characters>?) {
             mAdapter.mCharacters = result?.body()?.data?.results!!
-            mLoadingProgress.visibility = View.INVISIBLE
+            mLoadingProgress.visibility = View.GONE
         }
+
+        override fun onProgressUpdate(vararg values: Void?) {
+        }
+
     }
 
 }

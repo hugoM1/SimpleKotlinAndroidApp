@@ -20,7 +20,7 @@ class HomeFragmentAdapter: RecyclerView.Adapter<HomeFragmentAdapter.HomeFragment
         }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): HomeFragmentViewHolder {
-        var view: View = LayoutInflater.from(parent?.context).inflate(R.layout.home_fragment_item, parent, false)
+        val view: View = LayoutInflater.from(parent?.context).inflate(R.layout.home_fragment_item, parent, false)
 
         return HomeFragmentViewHolder(view)
     }
@@ -41,6 +41,7 @@ class HomeFragmentAdapter: RecyclerView.Adapter<HomeFragmentAdapter.HomeFragment
         fun update(character: Characters.DataBean.ResultsBean){
             itemText.text = character.name
         }
+
     }
 
 }
