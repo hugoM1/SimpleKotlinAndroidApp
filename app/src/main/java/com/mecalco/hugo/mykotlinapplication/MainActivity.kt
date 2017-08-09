@@ -7,6 +7,7 @@ import com.mecalco.hugo.mykotlinapplication.home.HomeFragment
 class MainActivity : AppCompatActivity() {
 
     companion object {
+        @JvmField
         var TAG: String = "MainActivity"
     }
 

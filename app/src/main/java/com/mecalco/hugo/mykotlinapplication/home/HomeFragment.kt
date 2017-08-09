@@ -21,12 +21,14 @@ import retrofit2.Response
  */
 class HomeFragment : Fragment() {
 
-    companion object{
+    companion object {
+        @JvmField
         val TAG = "HomeFragment"
+
         val fragmentHome = HomeFragment()
-        lateinit var mApiService: MarvelApiService
         lateinit var mAdapter: HomeFragmentAdapter
         lateinit var mLoadingProgress: ProgressBar
+
     }
 
     lateinit var mRecyclerView: RecyclerView
@@ -39,8 +41,11 @@ class HomeFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        var view: View? = null
+        inflater?.let {
+            view = it.inflate(R.layout.fragment_main, container, false)
+        }
 
-        val view : View = inflater!!.inflate(R.layout.fragment_main, container, false)
 
         return view
     }
@@ -52,11 +57,10 @@ class HomeFragment : Fragment() {
 
         mRecyclerView.adapter = mAdapter
 
-        mApiService = MarvelApiService(MarvelApp.mAPI)
         RetrieveCharactersTask().execute(TAG)
     }
 
-    fun initViews(view: View?){
+    fun initViews(view: View?) {
         mLoadingProgress = view?.findViewById(R.id.loading_progress) as ProgressBar
         mLoadingProgress.visibility = View.VISIBLE
 
@@ -69,16 +73,25 @@ class HomeFragment : Fragment() {
 
     class RetrieveCharactersTask : AsyncTask<String, Void, Response<Characters>?>() {
 
+        val mApiService: MarvelApiService = MarvelApiService(MarvelApp.mAPI)
+
         override fun doInBackground(vararg p0: String?): Response<Characters>? {
             return mApiService.getCharacters()
         }
 
         override fun onPostExecute(result: Response<Characters>?) {
-            mAdapter.mCharacters = result?.body()?.data?.results!!
+            val results = result?.body()?.data?.results
+            results?.let {
+                mAdapter.mCharacters = it
+            }
+
             mLoadingProgress.visibility = View.GONE
         }
 
         override fun onProgressUpdate(vararg values: Void?) {
+        }
+
+        override fun onPreExecute() {
         }
 
     }
