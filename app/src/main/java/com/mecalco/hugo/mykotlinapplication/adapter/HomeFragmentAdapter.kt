@@ -36,7 +36,7 @@ class HomeFragmentAdapter: RecyclerView.Adapter<HomeFragmentAdapter.HomeFragment
 
     class HomeFragmentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
-        var itemText  = itemView.findViewById(R.id.home_item_text) as TextView
+        val itemText  = itemView.findViewById<TextView>(R.id.home_item_text)!!
 
         fun update(character: Characters.DataBean.ResultsBean){
             itemText.text = character.name

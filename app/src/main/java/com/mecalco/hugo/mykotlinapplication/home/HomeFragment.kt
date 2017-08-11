@@ -25,12 +25,14 @@ class HomeFragment : Fragment() {
         @JvmField
         val TAG = "HomeFragment"
 
-        val fragmentHome = HomeFragment()
-        lateinit var mAdapter: HomeFragmentAdapter
-        lateinit var mLoadingProgress: ProgressBar
-
+        fun newInstance(): HomeFragment {
+            val fragment = HomeFragment()
+            return fragment
+        }
     }
 
+    lateinit var mAdapter: HomeFragmentAdapter
+    lateinit var mLoadingProgress: ProgressBar
     lateinit var mRecyclerView: RecyclerView
     lateinit var mLayoutManager: RecyclerView.LayoutManager
 
@@ -46,7 +48,6 @@ class HomeFragment : Fragment() {
             view = it.inflate(R.layout.fragment_main, container, false)
         }
 
-
         return view
     }
 
@@ -61,17 +62,20 @@ class HomeFragment : Fragment() {
     }
 
     fun initViews(view: View?) {
-        mLoadingProgress = view?.findViewById(R.id.loading_progress) as ProgressBar
-        mLoadingProgress.visibility = View.VISIBLE
+        view?.let {
+            mLoadingProgress = view.findViewById<ProgressBar>(R.id.loading_progress)
+            mLoadingProgress.visibility = View.VISIBLE
 
-        mRecyclerView = view.findViewById(R.id.home_recycler_view) as RecyclerView
-        mRecyclerView.setHasFixedSize(true)
+            mRecyclerView = view.findViewById<RecyclerView>(R.id.home_recycler_view)
+            mRecyclerView.setHasFixedSize(true)
+        }
 
-        mLayoutManager = LinearLayoutManager(activity)
+        mLayoutManager = LinearLayoutManager(activity) as RecyclerView.LayoutManager
         mRecyclerView.layoutManager = mLayoutManager
     }
 
-    class RetrieveCharactersTask : AsyncTask<String, Void, Response<Characters>?>() {
+    @SuppressWarnings("StaticFieldLeak")
+    inner class RetrieveCharactersTask : AsyncTask<String, Void, Response<Characters>?>() {
 
         val mApiService: MarvelApiService = MarvelApiService(MarvelApp.mAPI)
 
@@ -86,12 +90,6 @@ class HomeFragment : Fragment() {
             }
 
             mLoadingProgress.visibility = View.GONE
-        }
-
-        override fun onProgressUpdate(vararg values: Void?) {
-        }
-
-        override fun onPreExecute() {
         }
 
     }

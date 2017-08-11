@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     fun initViews(){
         supportFragmentManager.beginTransaction()
-                .add(R.id.main_container, HomeFragment.fragmentHome, " HomeFragment")
+                .add(R.id.main_container, HomeFragment.newInstance(), " HomeFragment")
                 .commit()
     }
 
